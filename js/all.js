@@ -42,6 +42,7 @@ function renderProductList(){
     productList.innerHTML =str;
 }
 
+//product Selector 
 productSelect.addEventListener('change', function(e){
     // console.log(e.target.value);
     const category = e.target.value;
@@ -49,6 +50,7 @@ productSelect.addEventListener('change', function(e){
         renderProductList();
         return; //終止不跑其他的
     }
+
     let str = "";
     productData.forEach(function(item){
         if(category === item.category) {
@@ -59,6 +61,7 @@ productSelect.addEventListener('change', function(e){
 
 })
 
+//add to cart
 productList.addEventListener("click", function(e){
     
     e.preventDefault(); //取消預設行為
@@ -91,7 +94,9 @@ productList.addEventListener("click", function(e){
 })
 
 function getCartList(){
-    axios.get(`https://hexschoollivejs.herokuapp.com/api/livejs/v1/customer/${api_path}/carts`).then(function(response){
+    axios.get(`https://hexschoollivejs.herokuapp.com/api/livejs/v1/customer/${api_path}/carts`)
+    .then(function(response){
+      document.querySelector(".js-total").textContent= toThousands(response.data.finalTotal);
     cartData = response.data.carts;
     let str ="";
     cartData.forEach(function(item){
@@ -117,6 +122,7 @@ function getCartList(){
 })
 }
 
+// delete
 cartList.addEventListener('click',function(e){
     e.preventDefault();
     console.log(e.target);
@@ -131,3 +137,94 @@ cartList.addEventListener('click',function(e){
         getCartList();
     })
 })
+
+
+// delete All
+const discardAllBtn = document.querySelector(".discardAllBtn");
+discardAllBtn.addEventListener("click",function(e){
+  e.preventDefault();
+  axios.delete(`https://hexschoollivejs.herokuapp.com/api/livejs/v1/customer/${api_path}/carts`)
+  .then(function(response){
+    alert("刪除購物車全品項成功！");
+    getCartList();
+  })
+  .catch(function(response){
+    alert("購物車已清空，請勿重複點擊")
+  })
+})
+
+
+
+//send order
+
+const orderInfoBtn = document.querySelector(".orderInfo-btn");
+orderInfoBtn.addEventListener("click",function(e){
+  e.preventDefault();
+  if(cartData.length ==0){
+    alert("請加入商品至購物車");
+    return;
+  }
+  const customerName = document.querySelector("#customerName").value;
+  const customerPhone = document.querySelector("#customerPhone").value;
+  const customerEmail = document.querySelector("#customerEmail").value;
+  const customerAddress = document.querySelector("#customerAddress").value;
+  const customerTradeWay = document.querySelector("#tradeWay").value;
+  if (customerName==""|| customerPhone==""|| customerEmail==""|| customerAddress==""|| customerTradeWay==""){
+    alert("請勿輸入空資訊!!");
+    return;
+  }
+  if (validateEmail(customerEmail)==false){
+    alert("請填寫正確的Email格式~~~");
+    return;
+  }
+  axios.post(`https://hexschoollivejs.herokuapp.com/api/livejs/v1/customer/${api_path}/orders`,{
+    "data": {
+      "user": {
+        "name": customerName,
+        "tel": customerPhone,
+        "email": customerEmail,
+        "address": customerAddress,
+        "payment": customerTradeWay
+      }
+    }
+  }).then(function(response){
+    alert("訂單建立成功");
+     document.querySelector("#customerName").value="";
+     document.querySelector("#customerPhone").value="";
+     document.querySelector("#customerEmail").value="";
+     document.querySelector("#customerAddress").value="";
+     document.querySelector("#tradeWay").value="ATM";
+    getCartList();
+  })
+})
+
+
+const customerEmail = document.querySelector("#customerEmail");
+customerEmail.addEventListener("blur",function(e){
+  if (validateEmail(customerEmail.value) == false) {
+    document.querySelector(`[data-message=Email]`).textContent = "請填寫正確 Email 格式";
+    return;
+  }
+})
+
+
+// util js、元件
+function toThousands(x) {
+    let parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  }
+  
+  function validateEmail(mail) {
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(mail)) {
+      return true
+    }
+    return false;
+  }
+  function validatePhone(phone) {
+    if (/^[09]{2}\d{8}$/.test(phone)) {
+      return true
+    }
+    return false;
+  }
+  

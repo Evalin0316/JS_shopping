@@ -193,7 +193,8 @@ body {
 
 .logo {
   padding: 36px 0;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  font-family: Copperplate、Papyrus;
 }
 
 @media (max-width: 767px) {
@@ -741,6 +742,7 @@ body {
 
 .orderInfo-btn:hover {
   background-color: #301E5F;
+ 
 }
 
 .orderPage-list {
