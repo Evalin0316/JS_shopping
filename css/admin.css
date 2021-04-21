@@ -194,6 +194,7 @@ body {
 .logo {
   padding: 36px 0;
   font-size: 1.5rem;
+  font-family: Copperplate、Papyrus;
 }
 
 @media (max-width: 767px) {
