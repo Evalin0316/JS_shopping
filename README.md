@@ -1,5 +1,5 @@
 ## JS_shopping
  
-#### 前台: https://evalin0316.github.io/JS_shopping/index.html
+#### 前台: https://evalin0316.github.io/shopping_cart/index.html
 
-#### 後台: https://evalin0316.github.io/JS_shopping/admin.html
+#### 後台: https://evalin0316.github.io/shopping_cart/admin.html
