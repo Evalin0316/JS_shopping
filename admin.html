@@ -25,7 +25,16 @@
   </nav>
   <section class="wrap">
     <h2 class="section-title">全品項營收比重</h2>
-    <div id="chart"></div>
+    
+    <div id="chart"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+      <circle cx="50" cy="50" r="0" fill="none" stroke="#e90c59" stroke-width="2">
+        <animate attributeName="r" repeatCount="indefinite" dur="1s" values="0;40" keyTimes="0;1" keySplines="0 0.2 0.8 1" calcMode="spline" begin="0s"></animate>
+        <animate attributeName="opacity" repeatCount="indefinite" dur="1s" values="1;0" keyTimes="0;1" keySplines="0.2 0 0.8 1" calcMode="spline" begin="0s"></animate>
+      </circle><circle cx="50" cy="50" r="0" fill="none" stroke="#46dff0" stroke-width="2">
+        <animate attributeName="r" repeatCount="indefinite" dur="1s" values="0;40" keyTimes="0;1" keySplines="0 0.2 0.8 1" calcMode="spline" begin="-0.5s"></animate>
+        <animate attributeName="opacity" repeatCount="indefinite" dur="1s" values="1;0" keyTimes="0;1" keySplines="0.2 0 0.8 1" calcMode="spline" begin="-0.5s"></animate>
+      </circle>
+      </svg></div>
   </section>
   <section class="wrap orderPage-list">
     <a href="#" class="discardAllBtn">清除全部訂單</a>
@@ -44,7 +53,7 @@
           </tr>
         </thead>
         <tbody class="js-orderList">
-        <tr>
+        <!-- <tr>
           <td>10088377474</td>
           <td>
             <p>小杰</p>
@@ -100,7 +109,7 @@
           <td>
             <input type="button" class="delSingleOrder-Btn" value="刪除">
           </td>
-        </tr>
+        </tr> -->
         </tbody>
       </table>
     </div>
