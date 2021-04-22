@@ -102,6 +102,7 @@ function renderC3_data(){
         }
       });
     }
+    
     function getOrderList(){
       axios.get(`https://hexschoollivejs.herokuapp.com/api/livejs/v1/admin/${api_path}/orders`,{
         headers:{
@@ -112,14 +113,14 @@ function renderC3_data(){
         orderData = response.data.orders;
         let str = '';
         orderData.forEach(function(item){
-          // 組時間字串
-          const timeStamp = new Date(item.createdAt*1000);
-          const orderTime = `${timeStamp.getFullYear()}/${timeStamp.getMonth()+1}/${timeStamp.getDate()}`;
+          // time string
+          const timeStamp = new Date(item.createdAt*1000); //get timestamp
+          const orderTime = `${timeStamp.getFullYear()}/${timeStamp.getMonth()+1}/${timeStamp.getDate()}`; //year/month/date
           
-          // 組產品字串
+          // product string
           let productStr = "";
           item.products.forEach(function(productItem){
-            productStr += `<p>${productItem.title}x${productItem.quantity}</p>`
+            productStr += `<p>${productItem.title}</p><br>數量:${productItem.quantity}</p>`
           })
         // 判斷訂單處理狀態
         let orderStatus="";
