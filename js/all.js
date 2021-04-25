@@ -200,9 +200,17 @@ orderInfoBtn.addEventListener("click",function(e){
 
 
 const customerEmail = document.querySelector("#customerEmail");
+const customerPhone = document.querySelector("#customerPhone");
 customerEmail.addEventListener("blur",function(e){
   if (validateEmail(customerEmail.value) == false) {
     document.querySelector(`[data-message=Email]`).textContent = "請填寫正確 Email 格式";
+    return;
+  } 
+});
+
+customerPhone.addEventListener("blur",function(e){
+  if (validatePhone(customerPhone.value) == false) {
+    document.querySelector(`[data-message=電話]`).textContent = "請填寫正確電話格式";
     return;
   }
 })
