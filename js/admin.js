@@ -26,15 +26,15 @@ function renderC3(){
 
     let categoryAry = Object.keys(total);
     console.log(categoryAry);
-    let newData = [];
+    let addData = [];
     categoryAry.forEach(function(item){
         let ary =[];
         ary.push(item);
         ary.push(total[item]);
-        newData.push(ary);
+        addData.push(ary);
     })
 
-    console.log(newData);
+    console.log(addData);
 
 
 
@@ -43,7 +43,7 @@ function renderC3(){
         bindto: '#chart',
         data:{
             type: "pie",
-            colums: newData,
+            colums: addData,
         },
     });
 }
@@ -112,23 +112,22 @@ function renderC3_data(){
         orderData = response.data.orders;
         let str = '';
         orderData.forEach(function(item){
-          // 組時間字串
+          // time
           const timeStamp = new Date(item.createdAt*1000);
           const orderTime = `${timeStamp.getFullYear()}/${timeStamp.getMonth()+1}/${timeStamp.getDate()}`;
           
-          // 組產品字串
           let productStr = "";
           item.products.forEach(function(productItem){
             productStr += `<p>${productItem.title}x${productItem.quantity}</p>`
           })
-        // 判斷訂單處理狀態
+        // order status
         let orderStatus="";
         if(item.paid==true){
           orderStatus="已處理"
         }else{
           orderStatus = "未處理"
         }
-        // 組訂單字串
+        
           str +=`<tr>
               <td>${item.id}</td>
               <td>
