@@ -102,8 +102,10 @@ function renderC3_data(){
         }
       });
     }
+
+    
     function getOrderList(){
-      axios.get(`https://hexschoollivejs.herokuapp.com/api/livejs/v1/admin/${api_path}/orders`,{
+      axios.get(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders`,{
         headers:{
           'Authorization':token,
         }
@@ -178,7 +180,7 @@ function renderC3_data(){
       }else{
         newStatus=true
       }
-      axios.put(`https://hexschoollivejs.herokuapp.com/api/livejs/v1/admin/${api_path}/orders`,{
+      axios.put(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders`,{
         "data": {
           "id": id,
           "paid": newStatus
@@ -195,7 +197,7 @@ function renderC3_data(){
     }
     
     function deletOrderItem(id){
-      axios.delete(`https://hexschoollivejs.herokuapp.com/api/livejs/v1/admin/${api_path}/orders/${id}`, {
+      axios.delete(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders/${id}`, {
         headers: {
           'Authorization': token,
         }
@@ -213,7 +215,7 @@ function renderC3_data(){
     const discardAllBtn = document.querySelector(".discardAllBtn");
     discardAllBtn.addEventListener("click",function(e){
       e.preventDefault();
-      axios.delete(`https://hexschoollivejs.herokuapp.com/api/livejs/v1/admin/${api_path}/orders`, {
+      axios.delete(`https://livejs-api.hexschool.io/api/livejs/v1/admin/${api_path}/orders`, {
         headers: {
           'Authorization': token,
         }
