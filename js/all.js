@@ -237,7 +237,7 @@ function toThousands(x) {
   }
   
 
-  const themeSwitcher = document.getElementById("theme-switch");
+const themeSwitcher = document.getElementById("theme-switch");
 
 themeSwitcher.checked = false;
 function clickHandler() {
