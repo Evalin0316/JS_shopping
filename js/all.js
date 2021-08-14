@@ -27,10 +27,7 @@ function combineProduct(item){
     <h4 class="productType">新品</h4>
     <div>
     <div class="mockup"></div>
-    <img src="${item.images}" class="img lazy" alt="">
-    <noscript>
-    <img src="${item.images}" alt="">
-     </noscript>
+    <img src="${item.images}"  alt="">
     </div>
     <a href="#" class="js-addCart" id="addCardBtn" data-id="${item.id}">加入購物車</a>
     <h3>${item.title}</h3>
@@ -112,9 +109,6 @@ function getCartList(){
           <div>
           <div class="mockup"></div>
             <img src="${item.product.images}" class="img lazy"  alt="">
-            <noscript>
-            <img src="${item.product.images}" alt="">
-                </noscript>
             </div>
             <p>${item.product.title}</p>
           </div>
