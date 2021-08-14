@@ -25,7 +25,10 @@ function getProductList(){
 function combineProduct(item){
     return `<li class="productCard">
     <h4 class="productType">新品</h4>
-    <img src="${item.images}" alt="">
+    <img class="img lazy" data-src="${item.images}" alt="">
+    <noscript>
+    <img class="img lazy" src="${item.images}" alt="">
+     </noscript>
     <a href="#" class="js-addCart" id="addCardBtn" data-id="${item.id}">加入購物車</a>
     <h3>${item.title}</h3>
     <del class="originPrice">NT$${item.origin_price}</del>
@@ -103,7 +106,10 @@ function getCartList(){
         str+=`<tr>
         <td>
           <div class="cardItem-title">
-            <img src="${item.product.images}" alt="">
+            <img class="img lazy" data-src="${item.product.images}" alt="">
+            <noscript>
+            <img class="img lazy" src="${item.product.images}" alt="">
+                </noscript>
             <p>${item.product.title}</p>
           </div>
         </td>
@@ -268,36 +274,34 @@ function checkTheme() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  var lazyloadImages = document.querySelectorAll("img.lazy");    
-  var lazyloadThrottleTimeout;
+
+//lazyloading
+// document.addEventListener("DOMContentLoaded", function() {
+//   var lazyloadImages = document.querySelectorAll("img.lazy");    
+//   var lazyloadThrottleTimeout;
   
-  function lazyload () {
-    if(lazyloadThrottleTimeout) {
-      clearTimeout(lazyloadThrottleTimeout);
-    }    
+//   function lazyload () {
+//     if(lazyloadThrottleTimeout) {
+//       clearTimeout(lazyloadThrottleTimeout);
+//     }    
     
-    lazyloadThrottleTimeout = setTimeout(function() {
-        var scrollTop = window.pageYOffset;
-        lazyloadImages.forEach(function(img) {
-            if(img.offsetTop < (window.innerHeight + scrollTop)) {
-              img.src = img.dataset.src;
-              img.classList.remove('lazy');
-            }
-        });
-        if(lazyloadImages.length == 0) { 
-          document.removeEventListener("scroll", lazyload);
-          window.removeEventListener("resize", lazyload);
-          window.removeEventListener("orientationChange", lazyload);
-        }
-    }, 20);
-  }
+//     lazyloadThrottleTimeout = setTimeout(function() {
+//         var scrollTop = window.pageYOffset;
+//         lazyloadImages.forEach(function(img) {
+//             if(img.offsetTop < (window.innerHeight + scrollTop)) {
+//               img.src = img.dataset.src;
+//               img.classList.remove('lazy');
+//             }
+//         });
+//         if(lazyloadImages.length == 0) { 
+//           document.removeEventListener("scroll", lazyload);
+//           window.removeEventListener("resize", lazyload);
+//           window.removeEventListener("orientationChange", lazyload);
+//         }
+//     }, 20);
+//   }
   
-  document.addEventListener("scroll", lazyload);
-  window.addEventListener("resize", lazyload);
-  window.addEventListener("orientationChange", lazyload);
-});
-
-
-
-Resources
+//   document.addEventListener("scroll", lazyload);
+//   window.addEventListener("resize", lazyload);
+//   window.addEventListener("orientationChange", lazyload);
+// });
